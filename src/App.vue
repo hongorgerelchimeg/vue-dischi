@@ -22,9 +22,13 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../node_modules/bootstrap/scss/bootstrap";
-@import "../node_modules/bootstrap/scss/functions";
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/mixins";
+$primary: #2D3A46;
+$secondary: #1E2D3B;
+
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
 
 </style>

@@ -1,6 +1,10 @@
 <template>
-  <main>
-      <card-album />
+  <main class="bg-secondary p-5">
+      <div class="row">
+        <card-album 
+        
+        />
+      </div>
   </main>
 </template>
 
@@ -11,9 +15,17 @@ export default {
     components: {
         CardAlbum
     },
+    data () {
+        return {
+            arrAlbum: null,
+        }
+    }
 };
 </script>
 
 <style scoped lang="scss">
-
+    .row {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
 </style>
