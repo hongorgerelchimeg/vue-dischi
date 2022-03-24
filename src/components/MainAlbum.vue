@@ -10,6 +10,7 @@
 
 <script>
 import CardAlbum from './CardAlbum.vue'
+import axios from 'axios'
 export default {
     name: 'MainAlbum',
     components: {
@@ -19,7 +20,16 @@ export default {
         return {
             arrAlbum: null,
         }
-    }
+    },
+    created () {
+        axios.get('https://flynn.boolean.careers/exercises/api/array/music')
+            .then((ele) => {
+                ele.data.response.forEach(ele => {
+                    this.arrAlbum.push(ele);
+                });
+                
+        })
+    },
 };
 </script>
 
