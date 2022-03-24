@@ -3,6 +3,9 @@
       <div v-if="pageLoaded == false" class="server-delay">
           <page-loader />
       </div>
+      <div v-else-if=" networkError == true" class="server-delay">
+          <h1>API Address Error, page item not found! Contact support!</h1>
+      </div>
       <div v-else class="row row-cols-lg-6 g-3">
         <card-album v-for="(album, index) in arrAlbum" :key="index" 
         :albumPoster="album.poster"
@@ -12,6 +15,7 @@
         :albumGenre="`genre-${album.genre}`"
         />
       </div>
+      
   </main>
 </template>
 
@@ -47,6 +51,7 @@ export default {
             }) .catch(error => {
                     // handle error
                     console.log(error);
+                    this.pageLoaded = true;
                     this.networkError = true;
                 });
         }, this.responseDelay);
@@ -60,6 +65,7 @@ export default {
         margin: 0 auto;
     }
     .server-delay {
+        color: white;
         display:flex;
         justify-content:center;
         align-items:center;
