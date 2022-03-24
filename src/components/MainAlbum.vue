@@ -1,8 +1,12 @@
 <template>
   <main class="bg-secondary p-5">
-      <div class="row">
-        <card-album 
-        
+      <div class="row row-cols-lg-6 g-3">
+        <card-album v-for="(album, index) in arrAlbum" :key="index" 
+        :albumPoster="album.poster"
+        :albmTitle="album.title"
+        :albumAuthor="album.author"
+        :albumYear="album.year"
+        :albumGenre="album.genre"
         />
       </div>
   </main>
@@ -18,7 +22,7 @@ export default {
     },
     data () {
         return {
-            arrAlbum: null,
+            arrAlbum: [],
         }
     },
     created () {

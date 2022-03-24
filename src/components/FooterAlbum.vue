@@ -1,6 +1,6 @@
 <template>
-  <footer>
-      footer
+  <footer class="bg-secondary">
+      
   </footer>
 </template>
 
@@ -11,5 +11,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+    footer {
+        height: 10vh;
+    }
 </style>
