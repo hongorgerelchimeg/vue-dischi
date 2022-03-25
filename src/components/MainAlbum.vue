@@ -15,6 +15,7 @@
         :albumGenre="`genre-${album.genre}`"
         />
       </div>
+      <search-bar :arr-album-prop="arrOptions" class="search-bar-absolute" @search="stringPassAgain" />
       
   </main>
 </template>
@@ -23,19 +24,29 @@
 import CardAlbum from './CardAlbum.vue'
 import PageLoader from './PageLoader.vue'
 import axios from 'axios'
+import SearchBar from './SearchBar.vue';
 export default {
     name: 'MainAlbum',
     components: {
         CardAlbum,
         PageLoader,
+        SearchBar,
     },
     data () {
         return {
             arrAlbum: [],
             networkError: false,
-            responseDelay: 3000,
+            responseDelay: 1,
             pageLoaded: false,
+            arrOptions: ['All'],
+            searchString: '',
 
+        }
+    },
+    methods: {
+        stringPassAgain(strSearch) {
+            this.searchString = strSearch;
+            console.log(this.searchString);
         }
     },
     created () {
@@ -45,6 +56,9 @@ export default {
                     this.pageLoaded = true;
                     ele.data.response.forEach(ele => {
                         this.arrAlbum.push(ele);
+                        if (!this.arrOptions.includes(ele.genre)) {
+                                return this.arrOptions.push(ele.genre);
+                            }
                 })
             
                     
@@ -55,6 +69,7 @@ export default {
                     this.networkError = true;
                 });
         }, this.responseDelay);
+
     },
 };
 </script>
@@ -70,5 +85,10 @@ export default {
         justify-content:center;
         align-items:center;
         height:80vh;
+    }
+    .search-bar-absolute {
+        position: absolute;
+        top: 10px;
+        right: 10px
     }
 </style>

@@ -1,12 +1,23 @@
 <template>
-  <header class='bg-primary p-2'>
+  <header class='bg-primary p-2 d-flex justify-content-between align-items-center'>
       <img :src="require('../assets/img/logo.png')" alt="">
+      
+
   </header>
 </template>
 
 <script>
+
+
 export default {
-    name: 'HeaderAlbum'
+    
+    name: 'HeaderAlbum',
+    data () {
+        return {
+            searchString: '',
+        }
+    },
+
 };
 </script>
 
