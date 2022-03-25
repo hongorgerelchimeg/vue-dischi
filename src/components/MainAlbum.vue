@@ -6,6 +6,7 @@
       <div v-else-if=" networkError == true" class="server-delay">
           <h1>API Address Error, page item not found! Contact support!</h1>
       </div>
+
       <div v-else class="row row-cols-lg-6 g-3">
         <card-album v-for="(album, index) in searchAlbum" :key="index" 
         :albumPoster="album.poster"
@@ -15,7 +16,12 @@
         :albumGenre="`genre-${album.genre}`"
         />
       </div>
-      <search-bar :arr-album-prop="arrOptions" class="search-bar-absolute" @search="stringPassAgain" />
+      <search-bar 
+      :arr-album-prop="arrOptions"
+      :arr-artist-prop="arrOptionsArtist"
+      class="search-bar-absolute" 
+      @searchArtist="stringPassArtist" 
+      @search="stringPassAgain" />
       
   </main>
 </template>
@@ -38,8 +44,11 @@ export default {
             networkError: false,
             responseDelay: 3000,
             pageLoaded: false,
-            arrOptions: ['All'],
+            arrOptions: [''],
+            arrOptionsArtist: [''],
             searchString: '',
+            strArtist: '',
+            combinedFilterArr: [],
 
         }
     },
@@ -47,6 +56,10 @@ export default {
         stringPassAgain(strSearch) {
             this.searchString = strSearch;
             console.log(this.searchString);
+        },
+        stringPassArtist(strArtistPass) {
+            this.strArtist = strArtistPass;
+            console.log(this.strArtist);
         }
     },
     created () {
@@ -58,6 +71,9 @@ export default {
                         this.arrAlbum.push(ele);
                         if (!this.arrOptions.includes(ele.genre)) {
                                 return this.arrOptions.push(ele.genre);
+                        }
+                        if (!this.arrOptionsArtist.includes(ele.author)) {
+                                return this.arrOptionsArtist.push(ele.author);
                             }
                 })
             
@@ -78,12 +94,12 @@ export default {
 
                
             } else {
-                     return this.arrAlbum.filter((objCharacter) => objCharacter.genre.includes(this.searchString));
+                return this.arrAlbum.filter((objCharacter) => objCharacter.genre.includes(this.searchString)).filter((objChar) => objChar.author.includes(this.strArtist));
                 }
       
         },
     }
-};
+    };
 </script>
 
 <style scoped lang="scss">
@@ -100,7 +116,7 @@ export default {
     }
     .search-bar-absolute {
         position: absolute;
-        top: 10px;
-        right: 10px
+        top: 1rem;
+        right: 30px
     }
 </style>
