@@ -12,6 +12,6 @@ export default {
 
 <style scoped lang="scss">
     footer {
-        height: 10vh;
+        
     }
 </style>

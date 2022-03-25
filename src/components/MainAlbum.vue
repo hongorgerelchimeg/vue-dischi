@@ -7,7 +7,7 @@
           <h1>API Address Error, page item not found! Contact support!</h1>
       </div>
       <div v-else class="row row-cols-lg-6 g-3">
-        <card-album v-for="(album, index) in arrAlbum" :key="index" 
+        <card-album v-for="(album, index) in searchAlbum" :key="index" 
         :albumPoster="album.poster"
         :albmTitle="album.title"
         :albumAuthor="album.author"
@@ -36,7 +36,7 @@ export default {
         return {
             arrAlbum: [],
             networkError: false,
-            responseDelay: 1,
+            responseDelay: 3000,
             pageLoaded: false,
             arrOptions: ['All'],
             searchString: '',
@@ -71,6 +71,18 @@ export default {
         }, this.responseDelay);
 
     },
+    computed: {
+        searchAlbum() {
+            if (this.searchString == 'All') {
+                return this.arrAlbum;
+
+               
+            } else {
+                     return this.arrAlbum.filter((objCharacter) => objCharacter.genre.includes(this.searchString));
+                }
+      
+        },
+    }
 };
 </script>
 
@@ -84,7 +96,7 @@ export default {
         display:flex;
         justify-content:center;
         align-items:center;
-        height:80vh;
+        height: 70vh;
     }
     .search-bar-absolute {
         position: absolute;

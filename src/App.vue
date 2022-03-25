@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header-album />
-    <main-album />
+    <main-album class="main" />
     <footer-album />
   </div>
 </template>
@@ -30,5 +30,8 @@ $secondary: #1E2D3B;
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 
+.main {
+  min-height: calc(100vh - 3.5rem);
+}
 
 </style>
